@@ -1,0 +1,9 @@
+SAM環境構築
+
+# デプロイ用S3バケット作成（sam-sample-deploymentbucket）
+
+# イニッとする
+sam init --runtime python3.7 --dependency-manager pip --app-template hello-world --name aws-sam-sample
+
+# ビルドする
+sam build
