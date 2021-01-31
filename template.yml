@@ -19,7 +19,7 @@ Parameters:
 
 Resources:
   SampleFunction:
-    Type: AWS::Serverless::Functionz
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: hello_world/
       Handler: app.lambda_handler
