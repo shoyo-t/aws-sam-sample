@@ -18,20 +18,55 @@ Parameters:
     Default: dev
 
 Resources:
-  SampleFunction:
+  SampleGetFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: hello_world/
-      Handler: app.lambda_handler
+      FunctionName: !Sub function-${AWS::StackName}-get
+      CodeUri: src/
+      Handler: api-get.lambda_handler
       Runtime: python3.7
       Events:
         SampleEvientGet:
           Type: Api
           Properties:
-            Path: /hello
+            Path: /sample
             Method: get
-            RestApiId: SampleApi
+            RestApiId: !Ref SampleApi
+  SamplePostFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub function-${AWS::StackName}-post
+      CodeUri: src/
+      Handler: api-post.lambda_handler
+      Runtime: python3.7
+      Events:
+        SampleEvientPost:
+          Type: Api
+          Properties:
+            Path: /sample
+            Method: post
+            RestApiId: !Ref SampleApi
   SampleApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: !Ref Environment
+      Name: !Sub api-${AWS::StackName}
+      DefinitionBody:
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+            Location: openapi.yml
+  LambdaExecutionRole:
+    Description: Creating service role in IAM for AWS Lambda
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub role-${AWS::StackName}
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: [lambda.amazonaws.com]
+          Action: sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
