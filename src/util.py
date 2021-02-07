@@ -1,14 +1,14 @@
 import json
 
 def get_success_object(body):
-    response = {
+    success_res = {
         "statusCode": 200,
         "headers": {
             "Access-Control-Allow-Origin": "*"
         },
         "body": json.dumps(body),
     }
-    return response
+    return success_res
 
 def get_client_error_object(msg):
     error_res = {
@@ -21,6 +21,7 @@ def get_client_error_object(msg):
             "message": msg,
         }),
     }
+    return error_res
 
 def calc_bmi(height, weight):
     bmi = weight / (height*height)

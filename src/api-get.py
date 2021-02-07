@@ -9,10 +9,10 @@ def lambda_handler(event, context):
         weight = float(event['queryStringParameters']['weight'])
     except KeyError as e:
         print(e)
-        return get_client_error_object('Bad parameter error.')
+        return util.get_client_error_object('Bad parameter error.')
     except ValueError as e:
         print(e)
-        return get_client_error_object('Bad parameter error.')
+        return util.get_client_error_object('Bad parameter error.')
     
     res_body = {
             "message": "Get success!!!",

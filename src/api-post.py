@@ -11,10 +11,10 @@ def lambda_handler(event, context):
         comment = body['comment']
     except KeyError as e:
         print(e)
-        return get_client_error_object('Bad parameter error.')
+        return util.get_client_error_object('Bad parameter error.')
     except ValueError as e:
         print(e)
-        return get_client_error_object('Bad parameter error.')
+        return util.get_client_error_object('Bad parameter error.')
 
     res_body = {
             "message": "Post success!!!",
