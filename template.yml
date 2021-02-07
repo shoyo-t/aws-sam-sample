@@ -25,6 +25,7 @@ Resources:
       CodeUri: src/
       Handler: api-get.lambda_handler
       Runtime: python3.7
+      Role: !GetAtt LambdaExecutionRole.Arn
       Events:
         SampleEvientGet:
           Type: Api
@@ -39,6 +40,7 @@ Resources:
       CodeUri: src/
       Handler: api-post.lambda_handler
       Runtime: python3.7
+      Role: !GetAtt LambdaExecutionRole.Arn
       Events:
         SampleEvientPost:
           Type: Api
