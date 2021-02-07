@@ -3,7 +3,7 @@ info:
   title: "aws-sam-sample"
   version: "1.0"
 paths:
-  /hello:
+  /sample:
     get:
       parameters:
       - name: "height"
